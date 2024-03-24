@@ -102,6 +102,10 @@ func NewExcludeValueIfValueConstraintModel(srcId int, srcValue ValueModel, targe
 	}
 }
 
+func (cModel ConstraintModel) ConstraintType() ConstraintType {
+	return cModel.constraintType
+}
+
 func (cModel ConstraintModel) SrcId() int {
 	return cModel.srcId
 }
