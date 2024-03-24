@@ -91,6 +91,14 @@ func (pModel ParameterModel) Id() int {
 	return pModel.id
 }
 
+func (pModel ParameterModel) Name() string {
+	return pModel.name
+}
+
+func (pModel ParameterModel) Value() ValueModel {
+	return pModel.value
+}
+
 type ConstraintType int
 
 const (
