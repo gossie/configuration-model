@@ -102,23 +102,47 @@ func NewExcludeValueIfValueConstraintModel(srcId int, srcValue ValueModel, targe
 	}
 }
 
+func (cModel ConstraintModel) SrcId() int {
+	return cModel.srcId
+}
+
+func (cModel ConstraintModel) SrcValue() ValueModel {
+	return cModel.srcValue
+}
+
+func (cModel ConstraintModel) TargetId() int {
+	return cModel.targetId
+}
+
+func (cModel ConstraintModel) TargetValue() ValueModel {
+	return cModel.targetValue
+}
+
 type Model struct {
 	nextParameterId int
 	parameters      []ParameterModel
 	constraints     []ConstraintModel
 }
 
-func (pModel *Model) AddParameter(name string, value ValueModel) ParameterModel {
-	pModel.nextParameterId++
+func (model *Model) AddParameter(name string, value ValueModel) ParameterModel {
+	model.nextParameterId++
 	newParameter := ParameterModel{
-		id:    pModel.nextParameterId,
+		id:    model.nextParameterId,
 		name:  name,
 		value: value,
 	}
-	pModel.parameters = append(pModel.parameters, newParameter)
+	model.parameters = append(model.parameters, newParameter)
 	return newParameter
 }
 
-func (pModel *Model) AddConstraint(constraint ConstraintModel) {
-	pModel.constraints = append(pModel.constraints, constraint)
+func (model *Model) AddConstraint(constraint ConstraintModel) {
+	model.constraints = append(model.constraints, constraint)
+}
+
+func (model Model) Parameters() []ParameterModel {
+	return model.parameters
+}
+
+func (model Model) Constraints() []ConstraintModel {
+	return model.constraints
 }
