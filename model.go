@@ -49,13 +49,13 @@ func NewStringSetModel(values []string) ValueModel {
 	}
 }
 
-type parameterModel struct {
+type ParameterModel struct {
 	id    int
 	name  string
 	value ValueModel
 }
 
-func (pModel parameterModel) Id() int {
+func (pModel ParameterModel) Id() int {
 	return pModel.id
 }
 
@@ -67,14 +67,14 @@ const (
 	ExcludeValueIfValue
 )
 
-type constraintModel struct {
+type ConstraintModel struct {
 	constraintType        ConstraintType
 	srcId, targetId       int
 	srcValue, targetValue ValueModel
 }
 
-func NewSetValueIfFinalConstraintModel(srcId, targetId int, targetValue ValueModel) constraintModel {
-	return constraintModel{
+func NewSetValueIfFinalConstraintModel(srcId, targetId int, targetValue ValueModel) ConstraintModel {
+	return ConstraintModel{
 		constraintType: SetValueIfFinal,
 		srcId:          srcId,
 		targetId:       targetId,
@@ -82,8 +82,8 @@ func NewSetValueIfFinalConstraintModel(srcId, targetId int, targetValue ValueMod
 	}
 }
 
-func NewSetValueIfValueConstraintModel(srcId int, srcValue ValueModel, targetId int, targetValue ValueModel) constraintModel {
-	return constraintModel{
+func NewSetValueIfValueConstraintModel(srcId int, srcValue ValueModel, targetId int, targetValue ValueModel) ConstraintModel {
+	return ConstraintModel{
 		constraintType: SetValueIfValue,
 		srcId:          srcId,
 		targetId:       targetId,
@@ -92,8 +92,8 @@ func NewSetValueIfValueConstraintModel(srcId int, srcValue ValueModel, targetId 
 	}
 }
 
-func NewExcludeValueIfValueConstraintModel(srcId int, srcValue ValueModel, targetId int, targetValue ValueModel) constraintModel {
-	return constraintModel{
+func NewExcludeValueIfValueConstraintModel(srcId int, srcValue ValueModel, targetId int, targetValue ValueModel) ConstraintModel {
+	return ConstraintModel{
 		constraintType: ExcludeValueIfValue,
 		srcId:          srcId,
 		targetId:       targetId,
@@ -104,13 +104,13 @@ func NewExcludeValueIfValueConstraintModel(srcId int, srcValue ValueModel, targe
 
 type Model struct {
 	nextParameterId int
-	parameters      []parameterModel
-	constraints     []constraintModel
+	parameters      []ParameterModel
+	constraints     []ConstraintModel
 }
 
-func (pModel *Model) AddParameter(name string, value ValueModel) parameterModel {
+func (pModel *Model) AddParameter(name string, value ValueModel) ParameterModel {
 	pModel.nextParameterId++
-	newParameter := parameterModel{
+	newParameter := ParameterModel{
 		id:    pModel.nextParameterId,
 		name:  name,
 		value: value,
@@ -119,6 +119,6 @@ func (pModel *Model) AddParameter(name string, value ValueModel) parameterModel 
 	return newParameter
 }
 
-func (pModel *Model) AddConstraint(constraint constraintModel) {
+func (pModel *Model) AddConstraint(constraint ConstraintModel) {
 	pModel.constraints = append(pModel.constraints, constraint)
 }
