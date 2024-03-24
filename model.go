@@ -49,6 +49,38 @@ func NewStringSetModel(values []string) ValueModel {
 	}
 }
 
+func (v ValueModel) ValueType() ValueType {
+	return v.valueType
+}
+
+func (v ValueModel) IntValues() []int {
+	return v.intValues
+}
+
+func (v ValueModel) StringValues() []string {
+	return v.stringValues
+}
+
+func (v ValueModel) Min() int {
+	return v.min
+}
+
+func (v ValueModel) Max() int {
+	return v.max
+}
+
+func (v ValueModel) MinOpen() bool {
+	return v.minOpen
+}
+
+func (v ValueModel) MaxOpen() bool {
+	return v.maxOpen
+}
+
+func (v ValueModel) FinalValue() int {
+	return v.finalValue
+}
+
 type ParameterModel struct {
 	id    int
 	name  string
